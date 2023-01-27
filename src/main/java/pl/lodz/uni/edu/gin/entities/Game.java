@@ -21,25 +21,16 @@ public class Game {
     private String name;
     private String description;
     private double price;
+
     @ManyToMany
+    @Cascade(CascadeType.ALL)
     @JoinTable(
             name = "game_of_category",
             joinColumns = @JoinColumn(name = "game_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    @Cascade(CascadeType.ALL)
     private List<Category> categories;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Game game = (Game) o;
-        return id == game.id && Double.compare(game.price, price) == 0 && Objects.equals(name, game.name) && Objects.equals(description, game.description) && Objects.equals(categories, game.categories);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, description, price, categories);
-    }
+    @ManyToMany(mappedBy = "games")
+    private List<AppUser> users;
 }
