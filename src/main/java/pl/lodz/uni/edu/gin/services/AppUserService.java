@@ -1,6 +1,9 @@
 package pl.lodz.uni.edu.gin.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.lodz.uni.edu.gin.dto.AppUserDto;
 import pl.lodz.uni.edu.gin.mappers.AppUserMapper;
@@ -12,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class AppUserService {
+public class AppUserService implements UserDetailsService {
     private final AppUserRepository appUserRepository;
     private final AppUserMapper appUserMapper;
 
@@ -30,5 +33,11 @@ public class AppUserService {
     public Optional<AppUserDto> getUserByName(String name) {
         return appUserRepository.findByUsername(name)
                 .map(appUserMapper::appUserToDto);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return appUserRepository.findByUsername(username)
+                .orElse(null);
     }
 }
