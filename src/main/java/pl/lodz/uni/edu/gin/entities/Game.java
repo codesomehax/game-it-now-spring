@@ -6,7 +6,6 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Getter
