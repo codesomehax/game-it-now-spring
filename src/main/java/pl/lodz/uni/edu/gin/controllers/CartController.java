@@ -45,4 +45,9 @@ public class CartController {
                 .noContent()
                 .build();
     }
+
+    @PostMapping("/{id}/buy")
+    public List<GameDto> buyGamesById(@PathVariable int id) {
+        return cartService.buyGameById(id);
+    }
 }

@@ -116,4 +116,32 @@ public class CartService {
                     );
                 }).setCart(Collections.emptyList());
     }
+
+    @Transactional
+    public List<GameDto> buyGameById(int id) {
+        AppUser appUser = appUserRepository
+                .findById(id)
+                .orElseThrow(() -> {
+                    throw new ResponseStatusException(
+                            HttpStatus.NOT_FOUND,
+                            "A user with given id does not exist"
+                    );
+                });
+
+        if (appUser.getCart().isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "The cart with given id is empty"
+            );
+        }
+
+        appUser.getGames().addAll(appUser.getCart());
+        appUser.setCart(Collections.emptyList());
+
+        return appUser
+                .getGames()
+                .stream()
+                .map(gameMapper::gameToDto)
+                .toList();
+    }
 }
