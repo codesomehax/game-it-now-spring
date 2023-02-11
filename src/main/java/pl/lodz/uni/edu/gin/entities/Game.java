@@ -2,6 +2,8 @@ package pl.lodz.uni.edu.gin.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -30,5 +32,6 @@ public class Game {
     private List<Category> categories;
 
     @ManyToMany(mappedBy = "games")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<AppUser> users;
 }

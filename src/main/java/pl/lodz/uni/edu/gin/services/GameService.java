@@ -104,12 +104,16 @@ public class GameService {
     }
 
     public void deleteGame(int id) {
-        if (gameRepository.existsById(id)) {
-            gameRepository.deleteById(id);
-        } else {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    "A game with given id does not exist"
-            );
-        }}
+        gameRepository
+                .findById(id)
+                .ifPresentOrElse(
+                        gameRepository::delete,
+                        () -> {
+                            throw new ResponseStatusException(
+                                    HttpStatus.NOT_FOUND,
+                                    "A game with given id does not exist"
+                            );
+                        }
+                );
+    }
 }

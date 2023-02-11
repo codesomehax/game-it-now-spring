@@ -13,10 +13,10 @@ public record GameAdditionRequest(
         List<String> categories
 ) {
     public GameAdditionRequest {
-        Objects.requireNonNull(name, "The name is required for game addition operation");
-        Objects.requireNonNull(description, "The description is required for game addition operation");
-        Objects.requireNonNull(price, "The price is required for game addition operation");
-        Objects.requireNonNull(categories, "The categories are required for game addition operation");
+        Objects.requireNonNull(name, "A name is required for game addition operation");
+        Objects.requireNonNull(description, "A description is required for game addition operation");
+        Objects.requireNonNull(price, "A price is required for game addition operation");
+        Objects.requireNonNull(categories, "Categories are required for game addition operation");
 
         if (name.isEmpty()) {
             throw new ResponseStatusException(

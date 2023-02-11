@@ -23,5 +23,6 @@ public class Category {
     private String description;
 
     @ManyToMany(mappedBy = "categories")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Game> gamesOfCategory;
 }

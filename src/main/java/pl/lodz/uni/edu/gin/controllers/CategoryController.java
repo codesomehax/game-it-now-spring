@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.lodz.uni.edu.gin.dto.CategoryDto;
+import pl.lodz.uni.edu.gin.requests.category.CategoryAdditionRequest;
+import pl.lodz.uni.edu.gin.requests.category.CategoryUpdateRequest;
 import pl.lodz.uni.edu.gin.services.CategoryService;
 
 import java.net.URI;
@@ -26,18 +28,24 @@ public class CategoryController {
                 .of(categoryService.getCategoryById(id));
     }
 
+    @GetMapping(params = "name")
+    public ResponseEntity<CategoryDto> getCategoryByName(@RequestParam String name) {
+        return ResponseEntity
+                .of(categoryService.getCategoryByName(name));
+    }
+
     @PostMapping
-    public ResponseEntity<CategoryDto> createNewCategory(@RequestBody CategoryDto newCategory) {
-        CategoryDto createdCategory = categoryService.addNewCategory(newCategory);
+    public ResponseEntity<CategoryDto> addNewCategory(@RequestBody CategoryAdditionRequest categoryAdditionRequest) {
+        CategoryDto createdCategory = categoryService.addNewCategory(categoryAdditionRequest);
 
         return ResponseEntity
                 .created(URI.create("/category/" + createdCategory.id()))
                 .body(createdCategory);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Void> changeDescription(@PathVariable int id, @RequestBody CategoryDto categoryDto) {
-        categoryService.changeDescription(id, categoryDto.description());
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateCategory(@PathVariable int id, @RequestBody CategoryUpdateRequest categoryUpdateRequest) {
+        categoryService.updateCategory(id, categoryUpdateRequest);
 
         return ResponseEntity
                 .noContent()
