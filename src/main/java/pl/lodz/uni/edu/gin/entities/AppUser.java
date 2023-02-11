@@ -31,6 +31,13 @@ public class AppUser implements UserDetails {
     private boolean banned = false;
     @ManyToMany
     @JoinTable(
+            name = "cart",
+            joinColumns = @JoinColumn(name = "app_user_id"),
+            inverseJoinColumns = @JoinColumn(name = "game_id")
+    )
+    private List<Game> cart = Collections.emptyList();
+    @ManyToMany
+    @JoinTable(
             name = "app_user_game_library",
             joinColumns = @JoinColumn(name = "app_user_id"),
             inverseJoinColumns = @JoinColumn(name = "game_id")

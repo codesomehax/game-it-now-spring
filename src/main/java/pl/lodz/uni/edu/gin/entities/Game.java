@@ -31,6 +31,11 @@ public class Game {
     )
     private List<Category> categories;
 
+
+    @ManyToMany(mappedBy = "cart")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<AppUser> inCartOf;
+
     @ManyToMany(mappedBy = "games")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<AppUser> users;

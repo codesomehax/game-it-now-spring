@@ -70,6 +70,7 @@ public class DatabaseInitialization implements InitializingBean {
                 .email("john@gmail.com")
                 .role(AppUser.Role.USER)
                 .games(List.of(witcher))
+                .cart(List.of(fortnite))
                 .build();
 
         List<Category> categoryStubs = List.of(rpg, shooter, fpp, tpp);
