@@ -17,4 +17,5 @@ public interface GameRepository extends JpaRepository<Game, Integer> {
             "JOIN g.categories c " +
             "WHERE c.name = :category_name")
     List<Game> findByCategoriesContaining(@Param("category_name") String category);
+    boolean existsByName(String name);
 }

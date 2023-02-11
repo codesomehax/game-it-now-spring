@@ -46,21 +46,21 @@ public class DatabaseInitialization implements InitializingBean {
         Game witcher = Game.builder()
                 .name("The Witcher")
                 .description("Slash monsters etc")
-                .price(100)
+                .price(100.0)
                 .categories(List.of(rpg, tpp))
                 .build();
 
         Game callOfDuty = Game.builder()
                 .name("Call of Duty")
                 .description("World War")
-                .price(150)
+                .price(150.0)
                 .categories(List.of(fpp, shooter))
                 .build();
 
         Game fortnite = Game.builder()
                 .name("Fortnite")
                 .description("Fancy shooting")
-                .price(0)
+                .price(0.0)
                 .categories(List.of(tpp, shooter))
                 .build();
 
@@ -76,6 +76,8 @@ public class DatabaseInitialization implements InitializingBean {
         List<Game> gameStubs = List.of(witcher, callOfDuty, fortnite);
         List<AppUser> userStubs = List.of(john);
 
-        appUserRepository.saveAllAndFlush(userStubs);
+        categoryRepository.saveAll(categoryStubs);
+        gameRepository.saveAll(gameStubs);
+        appUserRepository.saveAll(userStubs);
     }
 }

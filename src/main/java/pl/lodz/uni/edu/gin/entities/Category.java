@@ -1,9 +1,6 @@
 package pl.lodz.uni.edu.gin.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -21,10 +18,10 @@ public class Category {
     @Id
     @GeneratedValue
     private int id;
+    @Column(unique = true)
     private String name;
     private String description;
 
     @ManyToMany(mappedBy = "categories")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Game> gamesOfCategory;
 }

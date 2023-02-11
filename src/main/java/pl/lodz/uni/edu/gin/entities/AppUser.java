@@ -24,6 +24,7 @@ public class AppUser implements UserDetails {
     @Id
     @GeneratedValue
     private int id;
+    @Column(unique = true)
     private String username;
     private String password;
     private String email;
@@ -31,7 +32,6 @@ public class AppUser implements UserDetails {
     private Role role;
     private boolean banned = false;
     @ManyToMany
-    @Cascade(CascadeType.ALL)
     @JoinTable(
             name = "app_user_game_library",
             joinColumns = @JoinColumn(name = "app_user_id"),

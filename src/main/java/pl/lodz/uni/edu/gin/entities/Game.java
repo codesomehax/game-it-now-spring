@@ -2,8 +2,6 @@ package pl.lodz.uni.edu.gin.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import java.util.List;
 
@@ -18,12 +16,12 @@ public class Game {
     @Id
     @GeneratedValue
     private int id;
+    @Column(unique = true)
     private String name;
     private String description;
     private double price;
 
     @ManyToMany
-    @Cascade(CascadeType.ALL)
     @JoinTable(
             name = "game_of_category",
             joinColumns = @JoinColumn(name = "game_id"),
