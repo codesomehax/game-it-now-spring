@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.lodz.uni.edu.gin.dto.AppUserDto;
+import pl.lodz.uni.edu.gin.dto.GameDto;
 import pl.lodz.uni.edu.gin.services.AppUserService;
 
 import java.util.List;
@@ -27,5 +28,10 @@ public class AppUserController {
     @GetMapping(params = "name")
     public ResponseEntity<AppUserDto> getUserByName(@RequestParam String name) {
         return ResponseEntity.of(appUserService.getUserByName(name));
+    }
+
+    @GetMapping("/{id}/library")
+    public List<GameDto> getLibraryById(@PathVariable int id) {
+        return appUserService.getLibraryById(id);
     }
 }
