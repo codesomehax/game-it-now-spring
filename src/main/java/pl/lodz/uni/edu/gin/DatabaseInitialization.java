@@ -11,6 +11,7 @@ import pl.lodz.uni.edu.gin.repositories.AppUserRepository;
 import pl.lodz.uni.edu.gin.repositories.CategoryRepository;
 import pl.lodz.uni.edu.gin.repositories.GameRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -47,6 +48,7 @@ public class DatabaseInitialization implements InitializingBean {
                 .name("The Witcher")
                 .description("Slash monsters etc")
                 .price(100.0)
+                .imageUrl("https://image.api.playstation.com/vulcan/ap/rnd/202211/0711/kh4MUIuMmHlktOHar3lVl6rY.png ")
                 .categories(List.of(rpg, tpp))
                 .build();
 
@@ -54,6 +56,7 @@ public class DatabaseInitialization implements InitializingBean {
                 .name("Call of Duty")
                 .description("World War")
                 .price(150.0)
+                .imageUrl("https://image.api.playstation.com/vulcan/img/rnd/202008/1900/lTSvbByTYMqy6R22teoybKCg.png")
                 .categories(List.of(fpp, shooter))
                 .build();
 
@@ -61,6 +64,7 @@ public class DatabaseInitialization implements InitializingBean {
                 .name("Fortnite")
                 .description("Fancy shooting")
                 .price(0.0)
+                .imageUrl("https://image.api.playstation.com/vulcan/ap/rnd/202212/0200/wy3SIGJqFW7nz1r0Wi48PbbL.png")
                 .categories(List.of(tpp, shooter))
                 .build();
 
@@ -73,9 +77,18 @@ public class DatabaseInitialization implements InitializingBean {
                 .cart(List.of(fortnite))
                 .build();
 
+        AppUser sarah = AppUser.builder()
+                .username("Sarah")
+                .password(passwordEncoder.encode("4321"))
+                .email("sarah@gmail.com")
+                .role(AppUser.Role.ADMIN)
+                .games(List.of(fortnite))
+                .cart(Collections.emptyList())
+                .build();
+
         List<Category> categoryStubs = List.of(rpg, shooter, fpp, tpp);
         List<Game> gameStubs = List.of(witcher, callOfDuty, fortnite);
-        List<AppUser> userStubs = List.of(john);
+        List<AppUser> userStubs = List.of(john, sarah);
 
         categoryRepository.saveAll(categoryStubs);
         gameRepository.saveAll(gameStubs);

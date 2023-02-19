@@ -21,6 +21,8 @@ public class CartController {
 
     @PostMapping(value = "/{cartId}", params = "gameId")
     public ResponseEntity<Void> addGameToCartById(@PathVariable int cartId, @RequestParam int gameId) {
+        AuthenticationController.checkUserCorrespondsToId(cartId);
+
         cartService.addGameToCartById(cartId, gameId);
 
         return ResponseEntity
@@ -30,6 +32,8 @@ public class CartController {
 
     @DeleteMapping(value = "/{cartId}", params = "gameId")
     public ResponseEntity<Void> deleteGameFromCartById(@PathVariable int cartId, @RequestParam int gameId) {
+        AuthenticationController.checkUserCorrespondsToId(cartId);
+
         cartService.deleteGameFromCartById(cartId, gameId);
 
         return ResponseEntity
@@ -39,6 +43,8 @@ public class CartController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> clearCartById(@PathVariable int id) {
+        AuthenticationController.checkUserCorrespondsToId(id);
+
         cartService.clearCartById(id);
 
         return ResponseEntity
@@ -48,6 +54,7 @@ public class CartController {
 
     @PostMapping("/{id}/buy")
     public List<GameDto> buyGamesById(@PathVariable int id) {
+        AuthenticationController.checkUserCorrespondsToId(id);
         return cartService.buyGameById(id);
     }
 }

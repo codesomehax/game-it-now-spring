@@ -10,12 +10,14 @@ public record GameAdditionRequest(
         String name,
         String description,
         Double price,
+        String imageUrl,
         List<String> categories
 ) {
     public GameAdditionRequest {
         Objects.requireNonNull(name, "A name is required for game addition operation");
         Objects.requireNonNull(description, "A description is required for game addition operation");
         Objects.requireNonNull(price, "A price is required for game addition operation");
+        Objects.requireNonNull(imageUrl, "An imageUrl is required for game addition operation");
         Objects.requireNonNull(categories, "Categories are required for game addition operation");
 
         if (name.isEmpty()) {
@@ -29,6 +31,13 @@ public record GameAdditionRequest(
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "Description cannot be empty"
+            );
+        }
+
+        if (imageUrl.isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "ImageUrl cannot be empty"
             );
         }
 

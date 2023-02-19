@@ -76,10 +76,14 @@ public class GameService {
                 .findById(id)
                 .ifPresentOrElse(
                         game -> {
+                            if (gamePatchRequest.name() != null)
+                                game.setName(gamePatchRequest.name());
                             if (gamePatchRequest.description() != null)
                                 game.setDescription(gamePatchRequest.description());
                             if (gamePatchRequest.price() != null)
                                 game.setPrice(gamePatchRequest.price());
+                            if (gamePatchRequest.imageUrl() != null)
+                                game.setImageUrl(game.getImageUrl());
 
                             if (gamePatchRequest.categories() != null) {
                                 List<Category> categoriesToAssign = categoryRepository.findAllByNameIn(gamePatchRequest.categories());

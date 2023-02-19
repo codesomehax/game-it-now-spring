@@ -8,18 +8,18 @@ public record CategoryUpdateRequest(
         String description
 ) {
     public CategoryUpdateRequest {
-        if (name != null && name.isEmpty()) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Name cannot be empty"
-            );
-        }
-
-        if (description != null && description.isEmpty()) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Description cannot be empty"
-            );
-        }
+//        if (name != null && name.isEmpty()) {
+//            throw new ResponseStatusException(
+//                    HttpStatus.BAD_REQUEST,
+//                    "Name cannot be empty"
+//            );
+//        }
+//
+//        if (description != null && description.isEmpty()) {
+//            throw new ResponseStatusException(
+//                    HttpStatus.BAD_REQUEST,
+//                    "Description cannot be empty"
+//            );
+//        }
     }
 }

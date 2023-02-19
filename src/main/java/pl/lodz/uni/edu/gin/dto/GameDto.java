@@ -7,6 +7,7 @@ public record GameDto(
         String name,
         String description,
         double price,
+        String imageUrl,
         List<String> categories
 ) {
 }

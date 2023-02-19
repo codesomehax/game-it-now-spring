@@ -22,6 +22,7 @@ public class Game {
     private String name;
     private String description;
     private double price;
+    private String imageUrl;
 
     @ManyToMany
     @JoinTable(

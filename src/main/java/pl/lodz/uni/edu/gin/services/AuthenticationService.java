@@ -1,7 +1,6 @@
 package pl.lodz.uni.edu.gin.services;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +20,6 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final AppUserRepository appUserRepository;
@@ -39,7 +37,7 @@ public class AuthenticationService {
         AppUser user = appUserRepository.findByUsername(request.getUsername())
                 .orElseThrow();
         String jwtToken = jwtService.generateToken(user);
-        return new AuthenticationResponse(jwtToken);
+        return new AuthenticationResponse(jwtToken, appUserMapper.appUserToDto(user));
     }
 
     public AppUserDto registerUser(UserRegistrationRequest userRegistrationRequest) {
